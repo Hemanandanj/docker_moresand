@@ -1,0 +1,31 @@
+version: "3"
+
+services:
+  nodejs_app:
+    ports:
+      - "3000:3000"
+    networks:
+      - my_network
+    build:
+      context: .
+      dockerfile: app.Dockerfile
+
+  nginx_container:
+    ports:
+      - "80:80"
+    networks:
+      - my_network
+    build:
+      context: .
+      dockerfile: nginx.Dockerfile
+
+  db:
+    ports:
+      - "3306:3306"
+    build:
+      context: .
+      dockerfile: db.Dockerfile
+
+networks:
+  my_network:
+    driver: bridge
